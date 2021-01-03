@@ -32,7 +32,7 @@ body {
     background: #f5f3efff;
     color: #181a1c;
     font-size: 100%;
-    font-family: 'Roboto Condensed',Roboto,sans-serif;
+    font-family: Rockwell, serif;
     margin: 0;
 }
 
@@ -155,7 +155,7 @@ select {
     padding-right: 15px;
     padding-top: 15px;
     padding-bottom: 15px;
-    font-family: 'Roboto Condensed',Roboto,sans-serif;
+    font-family: rockwell, serif;
     font-size: inherit;
     color: #ffffff;
     background-color: #20303f;
