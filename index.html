@@ -2,7 +2,6 @@
 <html>
 <head>
 	<title>Zoom Virtual Background Generator | P.D. Soros Fellowship</title>
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 	<script src="static/canvas2image.js"></script>
 	<link rel="stylesheet" href="static/styles.css">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
@@ -77,9 +76,9 @@
 		This tool is for P.D. Soros Fellowship finalists to generate a custom Zoom background.
 	</p>
 	<p>
-		<strong>Note:</strong> If the background appears backwards to you, don't worry! The text will always display correctly to others, even if you select the "Mirror my video" option on Zoom.
+		<strong>Note:</strong> If the background appears backwards to you, don't worry! The text will always display correctly to others, even if you select the "Mirror my video" option.
 	</p>
-
+	<br>
 	<div>
 		<form>
 			<div class="side-by-side" style="float: left">
@@ -132,7 +131,8 @@
 
 	<a id="downloadlink" download="zoombackground.jpg" href="">Download Background</a>
 
-<img src="static/tan_logo.png" style="display:none;" id="logo">
+<img src="static/light_text_logo.png" style="display:none;" id="light_logo">
+<img src="static/dark_text_logo.png" style="display:none;" id="dark_logo">
 </div>
 <script>
 	// adapted from https://www0.gsb.columbia.edu/zoom_background/
@@ -225,7 +225,7 @@
 	}
 
 	function draw(ctx, w, h) {
-		ctx.font = "1000 150px marian, sans-serif";
+		ctx.font = "1000 150px 'Roboto Condensed', sans-serif";
 
 		var radialGrd = ctx.createRadialGradient(w/2, h*.9, 400, w/2, h*.9, h);
 
@@ -246,12 +246,12 @@
 		var firstMeasurement = ctx.measureText($first.value).width;
 
 		// last name will be smaller
-		ctx.font = "1000 100px marian, sans-serif";
+		ctx.font = "1000 100px 'Roboto Condensed', sans-serif";
 
 		var lastMeasurement = ctx.measureText($last.value).width;
 		var maxWidth = firstMeasurement > lastMeasurement ? firstMeasurement : lastMeasurement;
 
-		ctx.font = "bold 60px marian, sans-serif";
+		ctx.font = "bold 60px 'Roboto Condensed', sans-serif";
 		var genderMeasurement = ctx.measureText($pronouns.value).width;
 		maxWidth = maxWidth > genderMeasurement ? maxWidth : genderMeasurement;
 
@@ -273,17 +273,22 @@
 			ctx.fillStyle = '#f2f5f7';
 		}
 
-		ctx.font = "800 150px marian, sans-serif";
+		ctx.font = "800 150px 'Roboto Condensed', sans-serif";
 		ctx.fillText($first.value, leftMargin, firstLineBase, maxWidth);
 
-		ctx.font = "bold 100px marian, sans-serif";
+		ctx.font = "bold 100px 'Roboto Condensed', sans-serif";
 		ctx.fillText($last.value, leftMargin, secondLineBase, maxWidth);
 
-		ctx.font = "600 60px marian, sans-serif";
+		ctx.font = "600 60px 'Roboto Condensed', sans-serif";
 		ctx.fillText($pronouns.value, leftMargin, thirdLineBase, maxWidth);
 
-		var img = document.getElementById("logo");
-		var imgMargin = 10;
+		var img;
+		if ($background.selectedIndex == 1) { // light background
+			img = document.getElementById("dark_logo");
+		} else {
+			img = document.getElementById("light_logo");
+		}
+		var imgMargin = 50;
 		ctx.drawImage(img, w-img.width-imgMargin, imgMargin, img.width, img.height);
 	}
 
