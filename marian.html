@@ -225,7 +225,7 @@
 	}
 
 	function draw(ctx, w, h) {
-		ctx.font = "1000 150px rockwell, sans-serif";
+		ctx.font = "1000 150px marian, sans-serif";
 
 		var radialGrd = ctx.createRadialGradient(w/2, h*.9, 400, w/2, h*.9, h);
 
@@ -246,12 +246,12 @@
 		var firstMeasurement = ctx.measureText($first.value).width;
 
 		// last name will be smaller
-		ctx.font = "1000 100px rockwell, sans-serif";
+		ctx.font = "1000 100px marian, sans-serif";
 
 		var lastMeasurement = ctx.measureText($last.value).width;
 		var maxWidth = firstMeasurement > lastMeasurement ? firstMeasurement : lastMeasurement;
 
-		ctx.font = "bold 60px rockwell, sans-serif";
+		ctx.font = "bold 60px marian, sans-serif";
 		var genderMeasurement = ctx.measureText($pronouns.value).width;
 		maxWidth = maxWidth > genderMeasurement ? maxWidth : genderMeasurement;
 
@@ -273,13 +273,13 @@
 			ctx.fillStyle = '#f2f5f7';
 		}
 
-		ctx.font = "800 150px rockwell, sans-serif";
+		ctx.font = "800 150px marian, sans-serif";
 		ctx.fillText($first.value, leftMargin, firstLineBase, maxWidth);
 
-		ctx.font = "bold 100px rockwell, sans-serif";
+		ctx.font = "bold 100px marian, sans-serif";
 		ctx.fillText($last.value, leftMargin, secondLineBase, maxWidth);
 
-		ctx.font = "600 60px rockwell, sans-serif";
+		ctx.font = "600 60px marian, sans-serif";
 		ctx.fillText($pronouns.value, leftMargin, thirdLineBase, maxWidth);
 
 		var img;
