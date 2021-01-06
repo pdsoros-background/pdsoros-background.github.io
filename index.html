@@ -76,7 +76,7 @@
 		This tool is for P.D. Soros Fellowship finalists to generate a custom Zoom background.
 	</p>
 	<p>
-		<strong>Note:</strong> If the background appears backwards to you on Zoom, don't worry! The text will always display correctly to others, even if you select the "Mirror my video" option.
+		<strong>NOTE:</strong> If the background appears backwards to you on Zoom, don't worry! The text will always display correctly to others, even if you select the "Mirror my video" option.
 	</p>
 	<br>
 	<div>
@@ -91,10 +91,16 @@
 				<input type="text" id="last" placeholder="Last Name" tabindex="2">
 			</div>
 
-			<br>
-			<label>Preferred Pronouns (optional)</label>
-			<p><i>e.g. She/Her/Hers, He/Him/His, They/Them/Theirs</i></p>
-			<input type="text" name="pronouns" id="pronouns" placeholder="Optional pronouns" tabindex="3">
+			<label>Preferred Pronouns</label>
+			<div class="arrow-icon">
+			<select name="pronouns" id="pronouns">
+				<option disabled selected value>Select your pronouns.</option>
+				<option value="She/Her/Hers">She/Her/Hers</option>
+				<option value="He/Him/His">He/Him/His</option>
+				<option value="They/Them/Theirs">They/Them/Theirs</option>
+			</select>
+			<span class="arrow"><i class="down-arrow"></i></span>
+			</div>
 
 			<label>Background Color</label>
 			<div class="arrow-icon">
@@ -115,14 +121,14 @@
 				</div>
 		   </div>
 
-		   <div id="explanation" style="display:block">
+			<div id="explanation" style="display:block">
 			   <p>After you are happy with your new virtual background use the "Download Background" button below to save it to your local machine. <a href="https://support.zoom.us/hc/en-us/articles/210707503-Virtual-Background" target="_blank">Set it as your virtual background in your Zoom settings.</a></p>
-				<p><strong>Note:</strong> If you are using Safari and experience trouble with the download button, you can also right click on the image to download it.</p>
+				<p><strong>NOTE:</strong> If you are using Safari and experience trouble with the download button, you can hold down the Control key and click on the background to select the "Save Image As..." option.</p>
 			</div>
 
 			<div id="bkgimg" width="800" height="600"></div>
 
-		   <div>
+ 			<div>
 				<button id="createimage" class="action--download a-btn" tabindex="4">Download Background</button>
 			</div>
 
@@ -208,7 +214,7 @@
 			updateImage();
 		}
 
-		$pronouns.oninput = function (e) {
+		$pronouns.onchange = function (e) {
 			updateImage();
 		}
 
@@ -225,7 +231,7 @@
 	}
 
 	function draw(ctx, w, h) {
-		ctx.font = "1000 150px rockwell, sans-serif";
+		ctx.font = "1000 150px marian, sans-serif";
 
 		var radialGrd = ctx.createRadialGradient(w/2, h*.9, 400, w/2, h*.9, h);
 
@@ -237,6 +243,17 @@
 			radialGrd.addColorStop(1, "#263443"); // black
 		}
 
+		var img;
+		if ($background.selectedIndex == 1) { // light background
+			img = document.getElementById("dark_logo");
+		} else {
+			img = document.getElementById("light_logo");
+		}
+
+		var bkgwidth = $optionHD.checked ? 1920 : 1600;
+		var scale = $optionHD.checked ? 0.9 : 0.7;
+		var imgMargin = 50;
+
 		ctx.fillStyle = radialGrd;
 		ctx.fillRect(0,0,w,h);
 
@@ -245,19 +262,20 @@
 
 		var firstMeasurement = ctx.measureText($first.value).width;
 
-		// last name will be smaller
-		ctx.font = "1000 100px rockwell, sans-serif";
+		ctx.font = "1000 150px marian, sans-serif";
 
 		var lastMeasurement = ctx.measureText($last.value).width;
-		var maxWidth = firstMeasurement > lastMeasurement ? firstMeasurement : lastMeasurement;
+		// var maxWidth = firstMeasurement > lastMeasurement ? firstMeasurement : lastMeasurement;
 
-		ctx.font = "bold 60px rockwell, sans-serif";
+		var maxWidth = bkgwidth - img.width*scale - leftMargin*3;
+
+		ctx.font = "bold 60px marian, sans-serif";
 		var genderMeasurement = ctx.measureText($pronouns.value).width;
-		maxWidth = maxWidth > genderMeasurement ? maxWidth : genderMeasurement;
+		// maxWidth = maxWidth > genderMeasurement ? maxWidth : genderMeasurement;
 
 		var firstLineBase = 160;
-		var secondLineBase = 280;
-		var thirdLineBase = 380;
+		var secondLineBase = 310;
+		var thirdLineBase = 400;
 
 		// draw vertical line
 		ctx.fillStyle = '#db7474'; // pd soros pink
@@ -273,23 +291,17 @@
 			ctx.fillStyle = '#f2f5f7';
 		}
 
-		ctx.font = "800 150px rockwell, sans-serif";
+		ctx.font = "800 150px marian, sans-serif";
 		ctx.fillText($first.value, leftMargin, firstLineBase, maxWidth);
 
-		ctx.font = "bold 100px rockwell, sans-serif";
+		ctx.font = "800 150px marian, sans-serif";
 		ctx.fillText($last.value, leftMargin, secondLineBase, maxWidth);
 
-		ctx.font = "600 60px rockwell, sans-serif";
+		ctx.font = "600 60px marian, sans-serif";
 		ctx.fillText($pronouns.value, leftMargin, thirdLineBase, maxWidth);
 
-		var img;
-		if ($background.selectedIndex == 1) { // light background
-			img = document.getElementById("dark_logo");
-		} else {
-			img = document.getElementById("light_logo");
-		}
-		var imgMargin = 50;
-		ctx.drawImage(img, w-img.width-imgMargin, imgMargin, img.width, img.height);
+
+		ctx.drawImage(img, w-img.width*scale-imgMargin, imgMargin, img.width*scale, img.height*scale);
 	}
 
 	onload = init;
