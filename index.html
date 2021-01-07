@@ -92,15 +92,8 @@
 			</div>
 
 			<label>Preferred Pronouns</label>
-			<div class="arrow-icon">
-			<select name="pronouns" id="pronouns">
-				<option disabled selected value>Select your pronouns.</option>
-				<option value="She/Her/Hers">She/Her/Hers</option>
-				<option value="He/Him/His">He/Him/His</option>
-				<option value="They/Them/Theirs">They/Them/Theirs</option>
-			</select>
-			<span class="arrow"><i class="down-arrow"></i></span>
-			</div>
+			<p><i>e.g. She/Her/Hers, He/Him/His, They/Them/Theirs</i></p>
+			<input type="text" id="pronouns" placeholder="Preferred Pronouns" tabindex="3">
 
 			<label>Background Color</label>
 			<div class="arrow-icon">
@@ -214,7 +207,7 @@
 			updateImage();
 		}
 
-		$pronouns.onchange = function (e) {
+		$pronouns.oninput = function (e) {
 			updateImage();
 		}
 
@@ -291,13 +284,13 @@
 			ctx.fillStyle = '#f2f5f7';
 		}
 
-		ctx.font = "800 150px marian, sans-serif";
+		ctx.font = "100 150px marian, sans-serif";
 		ctx.fillText($first.value, leftMargin, firstLineBase, maxWidth);
 
-		ctx.font = "800 150px marian, sans-serif";
+		ctx.font = "100 150px marian, sans-serif";
 		ctx.fillText($last.value, leftMargin, secondLineBase, maxWidth);
 
-		ctx.font = "600 60px marian, sans-serif";
+		ctx.font = "100 60px marian, sans-serif";
 		ctx.fillText($pronouns.value, leftMargin, thirdLineBase, maxWidth);
 
 
