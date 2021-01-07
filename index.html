@@ -271,8 +271,8 @@
 		// maxWidth = maxWidth > genderMeasurement ? maxWidth : genderMeasurement;
 
 		var firstLineBase = 160;
-		var secondLineBase = 310;
-		var thirdLineBase = 400;
+		var secondLineBase = 280;
+		var thirdLineBase = 380;
 
 		// draw vertical line
 		ctx.fillStyle = '#db7474'; // pd soros pink
@@ -288,13 +288,13 @@
 			ctx.fillStyle = '#f2f5f7';
 		}
 
-		ctx.font = "100 150px marian, sans-serif";
+		ctx.font = "800 150px marian, sans-serif";
 		ctx.fillText($first.value, leftMargin, firstLineBase, maxWidth);
 
-		ctx.font = "100 150px marian, sans-serif";
+		ctx.font = "bold 100px marian, sans-serif";
 		ctx.fillText($last.value, leftMargin, secondLineBase, maxWidth);
 
-		ctx.font = "100 60px marian, sans-serif";
+		ctx.font = "600 60px marian, sans-serif";
 		ctx.fillText($pronouns.value, leftMargin, thirdLineBase, maxWidth);
 
 
