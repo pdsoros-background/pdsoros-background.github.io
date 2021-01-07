@@ -194,11 +194,11 @@
 		$createimage.onclick = function (e) {
 			updateImage();
 			if ($optionHD.checked){
-				if ($first.length>0 && $last.length>0 && $pronouns.length>0) {
+				if ($first.value.length>0 && $last.value.length>0 && $pronouns.value.length>0) {
 					Canvas2Image.saveAsImage(canvashd, 1920, 1080, 'jpg');
 				}
 			} else {
-				if ($first.length>0 && $last.length>0 && $pronouns.length>0) {
+				if ($first.value.length>0 && $last.value.length>0 && $pronouns.value.length>0) {
 					Canvas2Image.saveAsImage(canvas, 1600, 1200, 'jpg');
 				}
 			}
