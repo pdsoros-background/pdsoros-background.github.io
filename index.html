@@ -83,17 +83,17 @@
 		<form>
 			<div class="side-by-side" style="float: left">
 				<label class="label-side">First Name</label>
-				<input type="text" id="first" placeholder="First Name" tabindex="1">
+				<input type="text" id="first" placeholder="First Name" tabindex="1" required>
 			</div>
 
 			<div class="side-by-side" style="float: right">
 				<label class="label-side">Last Name</label>
-				<input type="text" id="last" placeholder="Last Name" tabindex="2">
+				<input type="text" id="last" placeholder="Last Name" tabindex="2" required>
 			</div>
 
 			<label>Preferred Pronouns</label>
 			<p><i>e.g. She/Her/Hers, He/Him/His, They/Them/Theirs</i></p>
-			<input type="text" id="pronouns" placeholder="Preferred Pronouns" tabindex="3">
+			<input type="text" id="pronouns" placeholder="Preferred Pronouns" tabindex="3" required>
 
 			<label>Background Color</label>
 			<div class="arrow-icon">
@@ -194,9 +194,13 @@
 		$createimage.onclick = function (e) {
 			updateImage();
 			if ($optionHD.checked){
-				Canvas2Image.saveAsImage(canvashd, 1920, 1080, 'jpg');
+				if ($first.length>0 && $last.length>0 && $pronouns.length>0) {
+					Canvas2Image.saveAsImage(canvashd, 1920, 1080, 'jpg');
+				}
 			} else {
-				Canvas2Image.saveAsImage(canvas, 1600, 1200, 'jpg');
+				if ($first.length>0 && $last.length>0 && $pronouns.length>0) {
+					Canvas2Image.saveAsImage(canvas, 1600, 1200, 'jpg');
+				}
 			}
 		}
 
