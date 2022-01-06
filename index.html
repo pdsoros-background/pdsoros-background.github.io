@@ -2,8 +2,8 @@
 <html>
 <head>
 	<title>Zoom Virtual Background Generator | P.D. Soros Fellowship</title>
-	<script src="static/canvas2image.js"></script>
-	<link rel="stylesheet" href="static/styles.css">
+	<script src="/static/canvas2image.js"></script>
+	<link rel="stylesheet" href="/static/styles.css">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
 </head>
@@ -73,7 +73,7 @@
 	<canvas width="1600" height="1200" id="cvs"></canvas>
 
 	<p>
-		This tool is for P.D. Soros Fellowship finalists to generate a custom Zoom background.
+		This tool is for P.D. Soros Fellowship panelists to generate a custom Zoom background.
 	</p>
 	<p>
 		<strong>NOTE:</strong> If the background appears backwards to you on Zoom, don't worry! The text will always display correctly to others, even if you select the "Mirror my video" option.
@@ -95,14 +95,7 @@
 			<p><i>e.g. She/Her/Hers, He/Him/His, They/Them/Theirs</i></p>
 			<input type="text" id="pronouns" placeholder="Preferred Pronouns" tabindex="3" required>
 
-			<label>Background Color</label>
-			<div class="arrow-icon">
-				<select name="background" id="background">
-					<option selected value="Dark">Dark</option>
-					<option value="Light">Light</option>
-				</select>
-			<span class="arrow"><i class="down-arrow"></i></span>
-			</div>
+			<input type="hidden" id="background" name="background" value="Dark">	
 
 			<div id="ratioOptions">
 				<input type="radio" id="optionHD" name="imageStyle" value="HD" checked="checked">
@@ -130,8 +123,8 @@
 
 	<a id="downloadlink" download="zoombackground.jpg" href="">Download Background</a>
 
-<img src="static/light_text_logo.png" style="display:none;" id="light_logo">
-<img src="static/dark_text_logo.png" style="display:none;" id="dark_logo">
+<img src="/static/light_text_logo.png" style="display:none;" id="light_logo">
+<img src="/static/dark_text_logo.png" style="display:none;" id="dark_logo">
 </div>
 <script>
 	// adapted from https://www0.gsb.columbia.edu/zoom_background/
@@ -231,13 +224,15 @@
 		ctx.font = "1000 150px marian, sans-serif";
 
 		var radialGrd = ctx.createRadialGradient(w/2, h*.9, 400, w/2, h*.9, h);
-
+	
+		$background.selectedIndex = 1; // set this value to make the font dark
+	
 		if($background.selectedIndex == 1) { // light background
-			radialGrd.addColorStop(0, "#f2f5f7"); // light gray
-			radialGrd.addColorStop(1, "#b9cad4"); // darker gray
+			radialGrd.addColorStop(0, "#e6e6e6"); // light gray
+			radialGrd.addColorStop(1, "#8c8c8c"); // darker gray
 		} else {
-			radialGrd.addColorStop(0, "#5c7ea3"); // grey
-			radialGrd.addColorStop(1, "#263443"); // black
+			radialGrd.addColorStop(0, "#e6e6e6"); // lighter gray
+			radialGrd.addColorStop(1, "#8c8c8c"); // gray
 		}
 
 		var img;
@@ -275,7 +270,7 @@
 		var thirdLineBase = 380;
 
 		// draw vertical line
-		ctx.fillStyle = '#db7474'; // pd soros pink
+		ctx.fillStyle = '#f5d77a'; // NOW yellow //'#db7474'; // pd soros pink
 		var height = firstLineBase;
 		var verticalLineWidth = 20;
 		if ($last.value.length > 0) { height = secondLineBase; }
@@ -296,7 +291,10 @@
 
 		ctx.font = "600 60px marian, sans-serif";
 		ctx.fillText($pronouns.value, leftMargin, thirdLineBase, maxWidth);
-
+		
+		// add "Panelist" text
+		ctx.font = "italic bolder 80px marian, sans-serif";
+		ctx.fillText("Panelist", w-ctx.measureText("Panelist").width-leftMargin, 220, maxWidth);
 
 		ctx.drawImage(img, w-img.width*scale-imgMargin, imgMargin, img.width*scale, img.height*scale);
 	}
