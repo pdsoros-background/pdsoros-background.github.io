@@ -98,8 +98,8 @@
 			<label>Background Color</label>
 			<div class="arrow-icon">
 				<select name="background" id="background">
-					<option selected value="Dark">Dark</option>
-					<option value="Light">Light</option>
+					<option selected value="Gray">Gray</option>
+					<option value="Teal">Teal</option>
 				</select>
 			<span class="arrow"><i class="down-arrow"></i></span>
 			</div>
@@ -233,11 +233,11 @@
 		var radialGrd = ctx.createRadialGradient(w/2, h*.9, 400, w/2, h*.9, h);
 
 		if($background.selectedIndex == 1) { // light background
-			radialGrd.addColorStop(0, "#f2f5f7"); // light gray
-			radialGrd.addColorStop(1, "#b9cad4"); // darker gray
+			radialGrd.addColorStop(0, "#d2ebea"); // lighter color
+			radialGrd.addColorStop(1, "#95d0ce"); // darker color
 		} else {
-			radialGrd.addColorStop(0, "#5c7ea3"); // grey
-			radialGrd.addColorStop(1, "#263443"); // black
+			radialGrd.addColorStop(0, "#e5e6e6"); // lighter color
+			radialGrd.addColorStop(1, "#acadad"); // darker color
 		}
 
 		var img;
